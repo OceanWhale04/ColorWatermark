@@ -1,0 +1,11 @@
+name,path
+Lena,test_images/color/512/4.2.07.tiff
+Baboon,test_images/color/512/2.1.03.tiff
+Peppers,test_images/color/512/2.1.06.tiff
+Sailboat,test_images/color/256/4.1.05.tiff
+House,test_images/color/256/4.1.06.tiff
+Airplane,test_images/color/256/4.1.08.tiff
+Beans,test_images/color/1024/2.2.05.tiff
+Woodland,test_images/color/1024/2.2.19.tiff
+Oakland,test_images/color/1024/2.2.24.tiff
+Splash,test_images/color/256/4.1.02.tiff

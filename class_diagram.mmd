@@ -1,0 +1,71 @@
+classDiagram
+direction LR
+
+class AppConfig {
+  +string mode
+  +string inputPath
+  +string outputPath
+  +string watermarkPath
+  +string originalPath
+  +double alpha
+  +string preprocess
+  +double beta
+  +double noiseStd
+  +double motionAngle
+  +int motionLength
+  +double motionNoiseStd
+  +double wienerK
+  +double clipLimit
+  +int tileSize
+  +int psfSize
+}
+
+class CLI {
+  +static AppConfig parse(int argc, char* argv[])
+}
+
+class WatermarkSystem {
+  +int run(const AppConfig& cfg)
+}
+
+class WatermarkCodec {
+  +static cv::Mat embed(const cv::Mat& cover, const cv::Mat& watermark, double alpha)
+  +static cv::Mat extract(const cv::Mat& watermarked, const cv::Mat& original, double alpha)
+}
+
+class Preprocessor {
+  +static cv::Mat clahe(const cv::Mat& src, double clipLimit, int tileSize)
+  +static cv::Mat wiener(const cv::Mat& blurred, const cv::Mat& psf, double K)
+  +static cv::Mat generateMotionPSF(int size, double angle, int length)
+}
+
+class Utils {
+  <<module>>
+  +simulateLowLight(src, beta, noiseStd) cv::Mat
+  +simulateMotionBlur(src, angle, length, noiseStd) cv::Mat
+  +horizontalConcat(img1, img2, img3) cv::Mat
+  +computePSNR(img1, img2) double
+  +computeSSIM(img1, img2) double
+  +computeAccuracy(extracted, originalWM) double
+}
+
+class DWTUtils {
+  <<module>>
+  +dwt2(src, LL, LH, HL, HH) void
+  +idwt2(dst, LL, LH, HL, HH) void
+}
+
+class Main {
+  +main(int argc, char* argv[]) int
+}
+
+Main ..> CLI : parse args
+Main ..> WatermarkSystem : execute
+CLI ..> AppConfig : create/fill
+WatermarkSystem ..> AppConfig : read config
+WatermarkSystem ..> WatermarkCodec : embed/extract
+WatermarkSystem ..> Preprocessor : CLAHE/Wiener
+WatermarkSystem ..> Utils : degrade/metrics/concat
+WatermarkCodec ..> DWTUtils : DWT/IDWT
+
+%% Note: demo entries are intentionally excluded here.

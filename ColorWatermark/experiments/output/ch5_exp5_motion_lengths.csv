@@ -1,0 +1,4 @@
+blur_length_px,mean_accuracy_no_preprocess,mean_accuracy_wiener,delta_pp
+10,89.990234,58.466797,-31.523438
+15,83.525391,56.386719,-27.138672
+20,76.152344,54.853516,-21.298828
