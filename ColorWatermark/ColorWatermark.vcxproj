@@ -137,53 +137,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="experiments\ch5_exp1_baseline.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="experiments\ch5_exp2_lowlight_clahe.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="experiments\ch5_exp3_lowlight_beta_sweep.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="experiments\ch5_exp4_motion_wiener.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="experiments\ch5_exp5_motion_length_sweep.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="experiments\ch6_exp4_cliplimit_sweep.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="experiments\ch6_exp7_noise_robustness.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="experiments\ch6_exp8_extreme_degradation.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="tests\unit_test_watermark.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="tests\integration_test_watermark.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="demos\paper_figures\fig2_5_clahe_compare.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="demos\paper_figures\fig2_6_wiener_compare.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="src\CLI.cpp" />
     <ClCompile Include="src\DWT_utils.cpp" />
     <ClCompile Include="src\Preprocessor.cpp" />
     <ClCompile Include="src\Utils.cpp" />
     <ClCompile Include="src\WatermarkCodec.cpp" />
     <ClCompile Include="src\WatermarkSystem.cpp" />
+    <ClCompile Include="tests\unit_test_watermark.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="experiments\ch5_dataset.h" />
-    <ClInclude Include="experiments\ch5_run_helpers.h" />
+    <ClInclude Include="experiments\ch6_dataset.h" />
+    <ClInclude Include="experiments\ch6_run_helpers.h" />
     <ClInclude Include="experiments\exp_common.h" />
     <ClInclude Include="include\CLI.h" />
     <ClInclude Include="include\DWT_utils.h" />
@@ -193,7 +157,7 @@
     <ClInclude Include="include\WatermarkSystem.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="experiments\ch5_images.csv" />
+    <None Include="experiments\ch6_images.csv" />
     <None Include="opencv_debug.props" />
   </ItemGroup>
   <ItemGroup>

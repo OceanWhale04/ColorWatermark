@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\DWT_utils.cpp" />
     <ClCompile Include="src\Preprocessor.cpp" />
     <ClCompile Include="src\WatermarkCodec.cpp" />
@@ -40,7 +41,7 @@
     <Image Include="test_images\gray\512\5.2.08.tiff" />
     <Image Include="test_images\gray\512\5.2.09.tiff" />
     <Image Include="test_images\gray\512\texmos2.s512.tiff" />
-    <Image Include="test_images\XM_32x32.png" />
+    <Image Include="test_images\XM_32x32.bmp" />
     <Image Include="output_figures\clahe_contrast_beta0.3.png" />
     <Image Include="output_figures\wiener_contrast_angle30_len15.png" />
   </ItemGroup>
