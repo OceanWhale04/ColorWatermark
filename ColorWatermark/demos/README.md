@@ -14,6 +14,8 @@ ColorWatermark/
 │   │   ├── main_clahe_demo.cpp
 │   │   └── main_wiener_demo.cpp
 │   └── paper_figures/
+│       ├── fig2_5_clahe_compare.cpp   （论文图 2-5）
+│       ├── fig2_6_wiener_compare.cpp  （论文图 2-6）
 │   ├──output/
 │   ├── fig4_1/
 │   ├── fig4_2/

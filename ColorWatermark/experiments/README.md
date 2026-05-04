@@ -35,6 +35,26 @@
 | `ch5_exp4_motion_wiener.cpp` | 5.4.1 实验四 / 表 5-6 | L=15，无预处理 vs 维纳 + MEAN |
 | `ch5_exp5_motion_length_sweep.cpp` | 5.4.2 实验五 / 表 5-7 | L∈{10,15,20} 的 10 幅均值 |
 
+### 第六章（`works.md` 表 6-6～6-13 对应）
+
+| 文件 | 对应论文表 | 说明 |
+|------|------------|------|
+| `ch6_exp4_cliplimit_sweep.cpp` | 表 6-9 | β=0.3，扫描 clipLimit，域对齐 CLAHE，10 幅均值 |
+| `ch6_exp7_noise_robustness.cpp` | 表 6-12 | L=15 模糊，退化噪声 σ 扫描，无预处理 vs 维纳 |
+| `ch6_exp8_extreme_degradation.cpp` | 表 6-13 | β=0.05 低光照 + CLAHE；L=25 模糊 + 维纳 |
+
+一键合并 CSV：工程目录下运行 `python run_all_experiments.py`（见脚本内说明）。
+
+### Visual Studio：多入口程序
+
+`.vcxproj` 已将 `ch5_exp*.cpp`、`ch6_exp*.cpp`、`tests\*.cpp` 及 `fig2_5/fig2_6` demo 设为 **ExcludedFromBuild**。跑某一实验时：
+
+1. 将该 `.cpp` 的 **ExcludedFromBuild** 改为 `false`；
+2. 将 `src\main.cpp` 设为 **ExcludedFromBuild** `true`；
+3. 重新生成，得到单一 `ColorWatermark.exe` 即当前入口。
+
+默认配置为 **`src\main.cpp` 参与生成**、其余实验/测试排除。
+
 默认命令行：
 
 ```text
