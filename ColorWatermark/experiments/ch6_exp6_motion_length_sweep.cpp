@@ -1,11 +1,12 @@
-// 5.4.2 实验五：L ∈ {10, 15, 20}，每组 10 幅平均 — 表 5-7
+//实验六：L ∈ {10, 15, 20}，每组 10 幅平均 — 表 5-7
 
-#include "ch5_dataset.h"
-#include "ch5_run_helpers.h"
+#include "ch6_dataset.h"
+#include "ch6_run_helpers.h"
 #include "exp_common.h"
 #include "Preprocessor.h"
 #include "Utils.h"
 #include "WatermarkCodec.h"
+#include <fstream>
 #include <iostream>
 #include <vector>
 
@@ -18,9 +19,9 @@ static constexpr double kMotNoise = 2.0;
 static constexpr double kWienerK = 0.01;
 
 int main(int argc, char* argv[]) {
-    string listCsv = (argc > 1) ? argv[1] : "experiments/ch5_images.csv";
+    string listCsv = (argc > 1) ? argv[1] : "experiments/ch6_images.csv";
     string wmPath = (argc > 2) ? argv[2] : "test_images/XM_32x32.bmp";
-    string outCsv = (argc > 3) ? argv[3] : "experiments/output/ch5_exp5_motion_lengths.csv";
+    string outCsv = (argc > 3) ? argv[3] : "experiments/output/ch6_exp6_motion_lengths.csv";
 
     vector<pair<string, string>> images;
     string err;
@@ -33,7 +34,7 @@ int main(int argc, char* argv[]) {
 
     vector<int> lengths{ 10, 15, 20 };
 
-    expEnsureDir("output/experiments");
+    expEnsureDir("experiments/output");
     ofstream csv;
     expCsvOpen(csv, outCsv);
     csv << "blur_length_px,mean_accuracy_no_preprocess,mean_accuracy_wiener,delta_pp\n";

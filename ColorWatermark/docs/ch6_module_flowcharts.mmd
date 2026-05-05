@@ -1,0 +1,57 @@
+%% 论文第五章/第六章模块流程图（Mermaid，可粘贴到支持 Mermaid 的编辑器或导出为图）
+
+flowchart TD
+    subgraph CLI["5.1 命令行解析流程"]
+        A1[启动] --> A2[解析 argv 键值对]
+        A2 --> A3{mode 合法?}
+        A3 -->|否| A4[打印 Usage 退出]
+        A3 -->|是| A5[填充 AppConfig]
+        A5 --> A6[调用 WatermarkSystem::run]
+    end
+
+flowchart TD
+    subgraph Embed["5.2 水印嵌入（RGB 三通道）"]
+        B1[读入 cover / wm] --> B2[wm 二值 32x32]
+        B2 --> B3[对每个 B,G,R 通道]
+        B3 --> B4[DWT -> LL 子带]
+        B4 --> B5[8x8 DCT + SVD 改最大奇异值]
+        B5 --> B6[IDCT + IDWT 重构通道]
+        B6 --> B7[merge 输出含水印图]
+    end
+
+flowchart TD
+    subgraph Extract["5.3 水印提取与投票"]
+        C1[读 degraded / original] --> C2{预处理?}
+        C2 -->|CLAHE/Wiener| C3[双侧域对齐预处理]
+        C2 -->|无| C4[保持原图]
+        C3 --> C5[分通道 DWT-DCT-SVD 得 Sigma]
+        C4 --> C5
+        C5 --> C6["差分 (Sigma_det-Sigma_orig)/alpha"]
+        C6 --> C7[三通道累加后 /3]
+        C7 --> C8[零阈值二值化]
+        C8 --> C9[reshape 32x32 输出]
+    end
+
+flowchart TD
+    subgraph Clahe["5.4 CLAHE（LAB）"]
+        D1[BGR 输入] --> D2[BGR2Lab]
+        D2 --> D3[split L,a,b]
+        D3 --> D4[CLAHE 仅增强 L]
+        D4 --> D5[merge + Lab2BGR]
+    end
+
+flowchart TD
+    subgraph Wiener["5.5 维纳频域复原"]
+        E1[分通道 float] --> E2[padding + DFT G,H]
+        E2 --> E3["F = G*conj(H)/(|H|^2+K) 矢量化"]
+        E3 --> E4[IDFT + 裁剪 + 8U]
+        E4 --> E5[merge BGR]
+    end
+
+flowchart TD
+    subgraph Metrics["5.6 指标与对比图"]
+        F1[读原图与结果图] --> F2[PSNR / SSIM]
+        F1 --> F3[horizontalConcat 拼图]
+        F2 --> F4[控制台输出]
+        F3 --> F5[imwrite 保存]
+    end

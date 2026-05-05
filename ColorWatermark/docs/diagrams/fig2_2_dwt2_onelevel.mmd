@@ -1,0 +1,17 @@
+%% 图2-2 二维一层 DWT（Haar）— 四子带布局；与 dwt2/idwt2 一致
+flowchart LR
+    subgraph IN[" "]
+        I["输入 I<br/>H×W 单通道"]
+    end
+    subgraph OUT["一层分解后（示意布局）"]
+        direction TB
+        subgraph R1[" "]
+            LL["LL 低频近似<br/>H/2×W/2"]
+            HL["HL 水平细节<br/>H/2×W/2"]
+        end
+        subgraph R2[" "]
+            LH["LH 垂直细节<br/>H/2×W/2"]
+            HH["HH 对角细节<br/>H/2×W/2"]
+        end
+    end
+    I -->|"可分离 Haar<br/>低通 h₀ 高通 h₁<br/>+ 二抽取"| OUT

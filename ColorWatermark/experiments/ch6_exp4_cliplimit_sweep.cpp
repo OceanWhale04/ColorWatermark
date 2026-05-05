@@ -1,7 +1,7 @@
 // 第六章表 6-9：CLAHE clipLimit 敏感度（固定 beta=0.3、tileSize=8，域对齐提取）
 
-#include "ch5_dataset.h"
-#include "ch5_run_helpers.h"
+#include "ch6_dataset.h"
+#include "ch6_run_helpers.h"
 #include "exp_common.h"
 #include "Preprocessor.h"
 #include "Utils.h"
@@ -25,9 +25,9 @@ int main(int argc, char* argv[]) {
         if (string(argv[i]) == "--word-protocol") continue;
         pos.push_back(argv[i]);
     }
-    string listCsv = pos.size() >= 1 ? pos[0] : "experiments/ch5_images.csv";
-    string wmPath = pos.size() >= 2 ? pos[1] : "test_images/XM_32x32.png";
-    string outCsv = pos.size() >= 3 ? pos[2] : "output/experiments/ch6_table6_9_cliplimit.csv";
+    string listCsv = pos.size() >= 1 ? pos[0] : "experiments/ch6_images.csv";
+    string wmPath = pos.size() >= 2 ? pos[1] : "test_images/XM_32x32.bmp";
+    string outCsv = pos.size() >= 3 ? pos[2] : "output/experiments/ch6_exp4_cliplimit.csv";
 
     vector<pair<string, string>> images;
     string err;
@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
 
     vector<double> clips{ 1.0, 2.0, 2.5, 3.0, 4.0 };
 
-    expEnsureDir("output/experiments");
+    expEnsureDir("experiments/output");
     ofstream csv;
     expCsvOpen(csv, outCsv);
     csv << "clipLimit,tileSize,beta,mean_accuracy_percent\n";

@@ -1,7 +1,7 @@
-// 5.2 实验一：常规场景 — 10 幅载体，α=0.05，PSNR / SSIM / 解码准确率
+// 实验一：常规场景 — 10 幅载体，α=0.05，PSNR / SSIM / 解码准确率
 
-#include "ch5_dataset.h"
-#include "ch5_run_helpers.h"
+#include "ch6_dataset.h"
+#include "ch6_run_helpers.h"
 #include "exp_common.h"
 #include "Utils.h"
 #include "WatermarkCodec.h"
@@ -14,9 +14,9 @@ using namespace std;
 static constexpr double kAlpha = 0.05;
 
 int main(int argc, char* argv[]) {
-    string listCsv = (argc > 1) ? argv[1] : "experiments/ch5_images.csv";
+    string listCsv = (argc > 1) ? argv[1] : "experiments/ch6_images.csv";
     string wmPath = (argc > 2) ? argv[2] : "test_images/XM_32x32.bmp";
-    string outCsv = (argc > 3) ? argv[3] : "experiments/output/ch5_exp1_baseline.csv";
+    string outCsv = (argc > 3) ? argv[3] : "experiments/output/ch6_exp1_baseline.csv";
 
     vector<pair<string, string>> images;
     string err;
@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-    expEnsureDir("output/experiments");
+    expEnsureDir("experiments/output");
     ofstream csv;
     expCsvOpen(csv, outCsv);
     csv << "image_name,psnr_db,ssim,accuracy_percent\n";

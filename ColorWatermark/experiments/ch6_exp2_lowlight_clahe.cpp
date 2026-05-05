@@ -1,7 +1,7 @@
-// 5.3.1 实验二：低光照 β=0.3，无预处理 vs CLAHE（仅处理待检测图；载体为原始图）
+// 实验二：低光照 β=0.3，无预处理 vs CLAHE（仅处理待检测图；载体为原始图）
 
-#include "ch5_dataset.h"
-#include "ch5_run_helpers.h"
+#include "ch6_dataset.h"
+#include "ch6_run_helpers.h"
 #include "exp_common.h"
 #include "Preprocessor.h"
 #include "Utils.h"
@@ -26,9 +26,9 @@ int main(int argc, char* argv[]) {
         if (a == "--word-protocol") wordProtocol = true;
     }
 
-    string listCsv = "experiments/ch5_images.csv";
+    string listCsv = "experiments/ch6_images.csv";
     string wmPath = "test_images/XM_32x32.bmp";
-    string outCsv = "output/experiments/ch5_exp2_lowlight_clahe.csv";
+    string outCsv = "experiments/output/ch6_exp2_lowlight_clahe.csv";
     // 参数顺序（跳过开关）：[listCsv] [wmPath] [outCsv]
     vector<string> pos;
     for (int i = 1; i < argc; ++i) {
@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-    expEnsureDir("output/experiments");
+    expEnsureDir("experiments/output");
     ofstream csv;
     expCsvOpen(csv, outCsv);
     csv << "image_name,accuracy_no_preprocess,accuracy_clahe,delta_pp,mean_abs_clahe_minus_low\n";

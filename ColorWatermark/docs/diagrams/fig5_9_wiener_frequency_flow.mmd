@@ -1,0 +1,12 @@
+%% 图5-9 维纳滤波频域流程（与 Preprocessor::wiener 一致；逐通道循环）
+flowchart TD
+    S([开始: BGR 模糊图 B, PSF, K]) --> SP[split → B,G,R]
+    SP --> F32[取下一未处理通道 → CV_32F]
+    F32 --> PAD[最优 DFT 尺寸 padding]
+    PAD --> DFT[G=DFT padded; H=DFT paddedPSF]
+    DFT --> WIE["num=G·H*; denom=|H|²+K; F=num/denom"]
+    WIE --> IDF[IDFT → 裁剪 → CV_8U 存该通道]
+    IDF --> DCH{还有通道?}
+    DCH -->|是| F32
+    DCH -->|否| MG[merge BGR]
+    MG --> E([结束])

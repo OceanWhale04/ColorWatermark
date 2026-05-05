@@ -1,0 +1,48 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2">
+  <diagram id="fig4-2" name="图4-2 系统部署图">
+    <mxGraphModel dx="1207" dy="880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PC" value="Windows PC（单机，无服务器/网络节点）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=2;fontStyle=1;verticalAlign=top;spacingTop=6;align=center;" parent="1" vertex="1">
+          <mxGeometry x="120" y="80" width="560" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="U" value="用户" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="160" y="200" width="46" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="T" value="命令行&lt;br&gt;（cmd / PowerShell）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="260" y="220" width="120" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="E" value="ColorWatermark.exe" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="420" y="210" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="D" value="opencv_world480.dll&lt;br&gt;（Release；Debug 多为 *480d.dll，依本机构建而定）" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="400" y="300" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="F" value="输入 / 输出图像文件&lt;br&gt;（载体、水印、含水印图、提取结果等）" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;align=left;spacingLeft=36;" parent="1" vertex="1">
+          <mxGeometry x="180" y="390" width="400" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="endArrow=classic;html=1;rounded=0;strokeWidth=1.5;" parent="1" source="U" target="T" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="endArrow=classic;html=1;rounded=0;strokeWidth=1.5;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="T" target="E" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="加载" style="endArrow=classic;html=1;rounded=0;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=11;" parent="1" source="E" target="D" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="读写" style="endArrow=classic;html=1;rounded=0;strokeWidth=1.5;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=11;" parent="1" source="E" target="F" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="465" y="320" />
+              <mxPoint x="400" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="T0" value="图4-2 系统部署图" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=14;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="280" y="40" width="240" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

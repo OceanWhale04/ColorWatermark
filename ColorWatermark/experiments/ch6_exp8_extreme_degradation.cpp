@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
     for (int i = 1; i < argc; ++i) pos.push_back(argv[i]);
     string listCsv = pos.size() >= 1 ? pos[0] : "experiments/ch6_images.csv";
     string wmPath = pos.size() >= 2 ? pos[1] : "test_images/XM_32x32.bmp";
-    string outCsv = pos.size() >= 3 ? pos[2] : "experiments/output/ch6_table6_13_extreme.csv";
+    string outCsv = pos.size() >= 3 ? pos[2] : "experiments/output/ch6_exp8_extreme.csv";
 
     vector<pair<string, string>> images;
     string err;

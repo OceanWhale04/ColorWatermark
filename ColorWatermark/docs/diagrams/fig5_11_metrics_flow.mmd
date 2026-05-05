@@ -1,0 +1,15 @@
+%% 图5-11 指标计算（与 Utils: computePSNR / computeSSIM / computeAccuracy 一致）
+flowchart TD
+    S([开始: 选择指标类型]) --> D{指标?}
+    D -->|PSNR| P1[absdiff 同尺寸 BGR]
+    P1 --> P2[MSE 三通道均值]
+    P2 --> P3["PSNR = 10·log₁₀(255²/MSE)"]
+    P3 --> OUT([输出])
+    D -->|SSIM| S1[BGR2GRAY 若三通道]
+    S1 --> S2[CV_64F + 11×11 高斯统计量]
+    S2 --> S3[SSIM 图 mean]
+    S3 --> OUT
+    D -->|准确率| A1[逐像素 >128 二值]
+    A1 --> A2[与原始水印逐位比较]
+    A2 --> A3["Acc = 100·correct/(W·H)"]
+    A3 --> OUT

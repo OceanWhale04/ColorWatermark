@@ -1,7 +1,7 @@
-// 5.3.2 实验三：β ∈ {0.3, 0.2, 0.1}，每组 10 幅平均准确率 — 表 5-5
+// 实验三：β ∈ {0.3, 0.2, 0.1}，每组 10 幅平均准确率 — 表 5-5
 
-#include "ch5_dataset.h"
-#include "ch5_run_helpers.h"
+#include "ch6_dataset.h"
+#include "ch6_run_helpers.h"
 #include "exp_common.h"
 #include "Preprocessor.h"
 #include "Utils.h"
@@ -28,9 +28,9 @@ int main(int argc, char* argv[]) {
         if (string(argv[i]) == "--word-protocol") continue;
         pos.push_back(argv[i]);
     }
-    string listCsv = pos.size() >= 1 ? pos[0] : "experiments/ch5_images.csv";
+    string listCsv = pos.size() >= 1 ? pos[0] : "experiments/ch6_images.csv";
     string wmPath = pos.size() >= 2 ? pos[1] : "test_images/XM_32x32.bmp";
-    string outCsv = pos.size() >= 3 ? pos[2] : "output/experiments/ch5_exp3_lowlight_beta.csv";
+    string outCsv = pos.size() >= 3 ? pos[2] : "experiments/output/ch6_exp3_lowlight_beta.csv";
 
     vector<pair<string, string>> images;
     string err;
@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 
     vector<double> betas{ 0.3, 0.2, 0.1 };
 
-    expEnsureDir("output/experiments");
+    expEnsureDir("experiments/output");
     ofstream csv;
     expCsvOpen(csv, outCsv);
     csv << "beta,mean_accuracy_no_preprocess,mean_accuracy_clahe,delta_pp\n";

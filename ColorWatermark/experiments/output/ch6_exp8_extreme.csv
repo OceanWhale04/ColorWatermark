@@ -1,0 +1,3 @@
+scenario,param,mean_accuracy_no_preprocess,mean_accuracy_with_preprocess
+lowlight_extreme,beta=0.05,79.550781,79.335938
+motion_blur_extreme,L=25,73.642578,64.394531

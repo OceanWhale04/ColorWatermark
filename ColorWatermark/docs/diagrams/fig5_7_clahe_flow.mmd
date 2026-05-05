@@ -1,0 +1,11 @@
+%% 图5-7 CLAHE 增强流程（与 Preprocessor::clahe 一致）
+flowchart TD
+    S([开始: 输入 I, clipLimit, tileSize]) --> D{通道数 == 1 ?}
+    D -->|是| Y[createCLAHE → apply 全图]
+    D -->|否 彩色| L1[cvtColor BGR2Lab]
+    L1 --> L2[split → L, a, b]
+    L2 --> L3[仅对 L: createCLAHE → apply]
+    L3 --> L4[merge → Lab]
+    L4 --> L5[cvtColor Lab2BGR]
+    L5 --> E([结束: 输出 Out])
+    Y --> E

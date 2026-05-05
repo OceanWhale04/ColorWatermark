@@ -1,8 +1,8 @@
-// 5.4.1 实验四：运动模糊 L=15、30°，无预处理 vs 维纳（K=0.01，仅复原待检测图；载体为原始图）
+// 实验五：运动模糊 L=15、30°，无预处理 vs 维纳（K=0.01，仅复原待检测图；载体为原始图）
 // PSF 与 Utils::simulateMotionBlur 一致：长度 L → 核尺寸 2L+1
 
-#include "ch5_dataset.h"
-#include "ch5_run_helpers.h"
+#include "ch6_dataset.h"
+#include "ch6_run_helpers.h"
 #include "exp_common.h"
 #include "Preprocessor.h"
 #include "Utils.h"
@@ -19,9 +19,9 @@ static constexpr double kMotNoise = 2.0;
 static constexpr double kWienerK = 0.01;
 
 int main(int argc, char* argv[]) {
-    string listCsv = (argc > 1) ? argv[1] : "experiments/ch5_images.csv";
+    string listCsv = (argc > 1) ? argv[1] : "experiments/ch6_images.csv";
     string wmPath = (argc > 2) ? argv[2] : "test_images/XM_32x32.bmp";
-    string outCsv = (argc > 3) ? argv[3] : "experiments/output/ch5_exp4_motion_wiener.csv";
+    string outCsv = (argc > 3) ? argv[3] : "experiments/output/ch6_exp5_motion_wiener.csv";
 
     vector<pair<string, string>> images;
     string err;
@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
     const int psfSize = kLength * 2 + 1;
     Mat psf = Preprocessor::generateMotionPSF(psfSize, kAngle, kLength);
 
-    expEnsureDir("output/experiments");
+    expEnsureDir("experiments/output");
     ofstream csv;
     expCsvOpen(csv, outCsv);
     csv << "image_name,accuracy_no_preprocess,accuracy_wiener,delta_pp\n";

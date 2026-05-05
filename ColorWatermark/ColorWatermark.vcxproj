@@ -137,13 +137,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="experiments\ch6_exp8_extreme_degradation.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\CLI.cpp" />
     <ClCompile Include="src\DWT_utils.cpp" />
     <ClCompile Include="src\Preprocessor.cpp" />
     <ClCompile Include="src\Utils.cpp" />
     <ClCompile Include="src\WatermarkCodec.cpp" />
     <ClCompile Include="src\WatermarkSystem.cpp" />
-    <ClCompile Include="tests\unit_test_watermark.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="experiments\ch6_dataset.h" />
@@ -183,7 +186,7 @@
     <Image Include="test_images\gray\512\5.2.08.tiff" />
     <Image Include="test_images\gray\512\5.2.09.tiff" />
     <Image Include="test_images\gray\512\texmos2.s512.tiff" />
-    <Image Include="test_images\XM_32x32.png" />
+    <Image Include="test_images\XM_32x32.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

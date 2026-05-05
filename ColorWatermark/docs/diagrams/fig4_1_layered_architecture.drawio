@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net" modified="2026-04-30T12:00:00.000Z" agent="ColorWatermark-docs" version="22.1.0" type="device">
+  <diagram id="fig4-1" name="图4-1 系统总体架构">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="L1" value="用户交互层" style="swimlane;horizontal=0;startSize=24;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="60" width="680" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="A1" value="CLI 参数解析" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;" vertex="1" parent="L1">
+          <mxGeometry x="40" y="40" width="160" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="A2" value="结果输出 / 控制台" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;" vertex="1" parent="L1">
+          <mxGeometry x="260" y="40" width="160" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="L2" value="业务逻辑层" style="swimlane;horizontal=0;startSize=24;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="680" height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="B1" value="主控模块&lt;br&gt;WatermarkSystem" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;" vertex="1" parent="L2">
+          <mxGeometry x="40" y="40" width="140" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="B2" value="预处理开关&lt;br&gt;none / clahe / wiener" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;" vertex="1" parent="L2">
+          <mxGeometry x="220" y="40" width="150" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="B3" value="流程调度&lt;br&gt;嵌入 / 提取 / 对比" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;" vertex="1" parent="L2">
+          <mxGeometry x="400" y="40" width="150" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="B4" value="模式选择&lt;br&gt;embed / extract&lt;br&gt;compare_*" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;" vertex="1" parent="L2">
+          <mxGeometry x="560" y="40" width="120" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="L3" value="算法层" style="swimlane;horizontal=0;startSize=24;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="390" width="680" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="C1" value="WatermarkCodec&lt;br&gt;embed / extract&lt;br&gt;DWT-DCT-SVD" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;" vertex="1" parent="L3">
+          <mxGeometry x="40" y="40" width="180" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="C2" value="Preprocessor&lt;br&gt;clahe / wiener&lt;br&gt;generateMotionPSF" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;" vertex="1" parent="L3">
+          <mxGeometry x="260" y="40" width="200" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="C3" value="DWT_utils&lt;br&gt;dwt2 / idwt2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;" vertex="1" parent="L3">
+          <mxGeometry x="500" y="40" width="140" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="L4" value="数据层" style="swimlane;horizontal=0;startSize=24;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="560" width="680" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="D1" value="OpenCV 基础库（cv::Mat、imread/imwrite、通道 split/merge、DCT、SVD 等）&lt;br&gt;本项目 Utils：PSNR / SSIM / 准确率、低光与运动模糊仿真" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;align=left;spacingLeft=10;" vertex="1" parent="L4">
+          <mxGeometry x="40" y="40" width="600" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="E1" style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.15;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="L1" target="L2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="E2" style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="L2" target="L3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="E3" style="endArrow=block;html=1;rounded=0;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="L3" target="L4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="T1" value="上层依赖下层" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=11;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="760" y="340" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="T0" value="图4-1 系统四层总体架构" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="260" y="20" width="320" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

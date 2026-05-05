@@ -1,0 +1,89 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2">
+  <diagram id="fig2-3" name="图2-3 DWT三层分解结构">
+    <mxGraphModel dx="1207" dy="880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="T0" value="图2-3 二维 DWT 三层分解结构（Mallat 塔式；每层仅对 LL 继续分解）" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=14;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="100" y="15" width="560" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="L0" value="原图 I&#xa;H × W" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="330" y="52" width="100" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="A0" value="2-D DWT" style="endArrow=block;html=1;rounded=0;fontSize=11;" parent="1" source="L0" target="B1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="B1" value="" style="rounded=0;fillColor=none;strokeColor=#333333;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="250" y="115" width="260" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="LL1" value="LL₁&#xa;近似&#xa;H/2×W/2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="260" y="125" width="120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="HL1" value="HL₁&#xa;水平细节" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="380" y="125" width="120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="LH1" value="LH₁&#xa;垂直细节" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="260" y="180" width="120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="HH1" value="HH₁&#xa;对角细节" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="380" y="180" width="120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="L1t" value="第 1 层" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;fontStyle=2" parent="1" vertex="1">
+          <mxGeometry x="200" y="165" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="A1" value="对 LL₁ 再分解" style="endArrow=block;html=1;rounded=0;fontSize=10;" parent="1" source="LL1" target="B2" edge="1">
+          <mxGeometry x="0.5264" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B2" value="" style="rounded=0;fillColor=none;strokeColor=#333333;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="270" y="285" width="130" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="LL2" value="LL₂&#xa;H/4×W/4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="278" y="292" width="55" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="HL2" value="HL₂" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="333" y="292" width="55" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="LH2" value="LH₂" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="278" y="347" width="55" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="HH2" value="HH₂" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="333" y="347" width="55" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="L2t" value="第 2 层" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;fontStyle=2" parent="1" vertex="1">
+          <mxGeometry x="210" y="335" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="A2" value="对 LL₂ 再分解" style="endArrow=block;html=1;rounded=0;fontSize=10;" parent="1" source="LL2" target="B3" edge="1">
+          <mxGeometry x="0.5554" y="6" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B3" value="" style="rounded=0;fillColor=none;strokeColor=#333333;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="293" y="455" width="84" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="LL3" value="LL₃" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="298" y="460" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="HL3" value="HL₃" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="334" y="460" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="LH3" value="LH₃" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="298" y="496" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="HH3" value="HH₃" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="334" y="496" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="L3t" value="第 3 层" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;fontStyle=2" parent="1" vertex="1">
+          <mxGeometry x="220" y="488" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="BR" value="各层 LH、HL、HH&#xa;不再向下分裂&#xa;（高频金字塔）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;dashed=1;fontSize=10;fontColor=#555555;align=center;" parent="1" vertex="1">
+          <mxGeometry x="530" y="115" width="130" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="NOTE" value="与正文、代码的对应：① 本工程仅采用「一层」分解，在 LL₁ 上做 DCT-SVD；本图为 MRA 理论中三层塔式示意。&lt;div&gt;② Haar 系数实现为 1/√2，与 [0.5,±0.5] 差常数因子。&lt;/div&gt;&lt;div&gt;③「合成与分析互为转置」指正交小波的正交基关系；idwt2 与 dwt2 配对可逆。&lt;/div&gt;&lt;div&gt;④ 子带与边缘含义与 2.2.1 节及 DWT_utils「先列对、再行对」约定一致。&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=10;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="170" y="570" width="620" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

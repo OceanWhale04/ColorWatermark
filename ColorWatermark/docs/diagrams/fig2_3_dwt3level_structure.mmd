@@ -1,0 +1,30 @@
+%% 图2-3 二维 DWT 三层塔式分解（示意；工程实现仅一层）
+flowchart TB
+    I["原图 I<br/>H×W"]
+    subgraph L1["第1层 2×2 子带"]
+        direction TB
+        subgraph L1a[" "]
+            LL1[LL₁] 
+            HL1[HL₁]
+        end
+        subgraph L1b[" "]
+            LH1[LH₁]
+            HH1[HH₁]
+        end
+    end
+    subgraph L2["第2层 仅对 LL₁"]
+        direction TB
+        LL2[LL₂] 
+        HL2[HL₂]
+        LH2[LH₂]
+        HH2[HH₂]
+    end
+    subgraph L3["第3层 仅对 LL₂"]
+        LL3[LL₃]
+        HL3[HL₃]
+        LH3[LH₃]
+        HH3[HH₃]
+    end
+    I --> L1
+    LL1 --> L2
+    LL2 --> L3

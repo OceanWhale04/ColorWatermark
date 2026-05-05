@@ -1,0 +1,107 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2">
+  <diagram id="fig5-11" name="图5-11 指标计算流程">
+    <mxGraphModel dx="1207" dy="880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="T0" value="图5-11 指标计算流程图（与 Utils.cpp 中 PSNR / SSIM / 准确率一致）" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=13;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="100" y="15" width="520" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="S" value="开始：按调用场景选择指标&#xa;（嵌入：PSNR+SSIM；提取：准确率）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="200" y="60" width="320" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="D" value="指标类型？" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="260" y="160" width="200" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="P1" value="PSNR（computePSNR）&#xa;输入：两幅同尺寸 BGR 8U" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="40" y="310" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="P1a" value="absdiff → 平方 → mean&#xa;MSE = (mse_B+mse_G+mse_R)/3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="40" y="385" width="200" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="P1b" value="PSNR = 10·log₁₀(255² / MSE)&#xa;（MSE 极小时返回上限 100）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="40" y="455" width="200" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="S1" value="SSIM（computeSSIM）&#xa;输入：两幅 BGR 或灰度 8U" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="260" y="310" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="S1a" value="若为 3 通道：BGR2GRAY&#xa;转 CV_64F" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="260" y="385" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="S1b" value="11×11 高斯窗 μ、σ²、σ₁₂&#xa;C1=6.5025, C2=58.5225（与经典 SSIM 常数一致）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="260" y="445" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="S1c" value="SSIM 图逐点相除 → mean → 标量 MSSIM" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="260" y="525" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="A1" value="准确率（computeAccuracy）&#xa;输入：提取水印 vs 原始水印&#xa;同尺寸 CV_8U" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="480" y="310" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="A1a" value="逐像素二值化（&gt;128→255 否则 0）&#xa;一致则 correct++" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="480" y="395" width="200" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="A1b" value="准确率 = 100 × correct / (W×H)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="480" y="465" width="200" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="E" value="结束：输出标量指标至控制台 / 记录" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="220" y="620" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NOTE" value="注意：PSNR 实现假定三通道彩色；单通道 float 场景勿直接复用（单元测试中对 Haar 重构使用独立 PSNR 公式）。" style="text;html=1;strokeColor=none;fillColor=none;align=left;fontSize=11;fontStyle=2" parent="1" vertex="1">
+          <mxGeometry x="70" y="680" width="640" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;" parent="1" source="S" target="D" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="PSNR" style="endArrow=block;html=1;rounded=0;fontSize=10;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="D" target="P1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="SSIM" style="endArrow=block;html=1;rounded=0;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="D" target="S1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="准确率" style="endArrow=block;html=1;rounded=0;fontSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="D" target="A1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ep1" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;" parent="1" source="P1" target="P1a" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ep2" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;" parent="1" source="P1a" target="P1b" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ep3" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="P1b" target="E" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="580" />
+              <mxPoint x="290" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="es1" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;" parent="1" source="S1" target="S1a" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="es2" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;" parent="1" source="S1a" target="S1b" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="es3" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;" parent="1" source="S1b" target="S1c" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="es4" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="S1c" target="E" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ea1" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;" parent="1" source="A1" target="A1a" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ea2" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;" parent="1" source="A1a" target="A1b" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ea3" style="endArrow=block;html=1;rounded=0;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="A1b" target="E" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="580" y="580" />
+              <mxPoint x="430" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

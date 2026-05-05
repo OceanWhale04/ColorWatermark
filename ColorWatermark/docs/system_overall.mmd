@@ -1,0 +1,48 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'background': 'transparent', 'primaryColor': '#ffffff', 'lineColor': '#000000', 'textColor': '#000000', 'tertiaryColor': '#ffffff'}}}%%
+flowchart TB
+    subgraph L1["用户交互层"]
+        direction LR
+        A1[CLI 参数解析]
+        A2[结果输出/控制台]
+    end
+
+    subgraph L2["业务逻辑层"]
+        direction LR
+        B1[主控模块<br/>WatermarkSystem]
+        B2[预处理开关<br/>none / clahe / wiener]
+        B3[流程调度<br/>嵌入 / 提取]
+        B4[模式选择<br/>embed / extract]
+    end
+
+    subgraph L3["算法层"]
+        direction LR
+        C1[WatermarkCodec<br/>embed / extract<br/>DWT-DCT-SVD]
+        C2[Preprocessor<br/>clahe / wiener<br/>generatePSF]
+        C3[DWT_utils<br/>dwt2 / idwt2]
+    end
+
+    subgraph L4["数据层"]
+        D1[OpenCV 基础库<br/>cv::Mat / imread / imwrite<br/>split / merge / dct / SVD …]
+    end
+
+    A1 & A2 --> B1
+    B1 --> B2 & B3 & B4
+    B2 & B3 & B4 --> C1 & C2 & C3
+    C1 & C2 & C3 --> D1
+
+    style A1 fill:none,stroke:#000,stroke-width:1.5px,color:#000
+    style A2 fill:none,stroke:#000,stroke-width:1.5px,color:#000
+    style B1 fill:none,stroke:#000,stroke-width:1.5px,color:#000
+    style B2 fill:none,stroke:#000,stroke-width:1.5px,color:#000
+    style B3 fill:none,stroke:#000,stroke-width:1.5px,color:#000
+    style B4 fill:none,stroke:#000,stroke-width:1.5px,color:#000
+    style C1 fill:none,stroke:#000,stroke-width:1.5px,color:#000
+    style C2 fill:none,stroke:#000,stroke-width:1.5px,color:#000
+    style C3 fill:none,stroke:#000,stroke-width:1.5px,color:#000
+    style D1 fill:none,stroke:#000,stroke-width:1.5px,color:#000
+    style L1 fill:none,stroke:#000,stroke-width:1px,color:#000
+    style L2 fill:none,stroke:#000,stroke-width:1px,color:#000
+    style L3 fill:none,stroke:#000,stroke-width:1px,color:#000
+    style L4 fill:none,stroke:#000,stroke-width:1px,color:#000
+
+    linkStyle default stroke:#000,stroke-width:1.5px
