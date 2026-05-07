@@ -1,0 +1,9 @@
+operation,mean_ms,remark
+imread,7.120990000,cv::imread per image path (raw file)
+embed,309.420280000,alpha=0.050000000 DWT-DCT-SVD
+extract_no_preprocess,261.270380000,in-memory only
+clahe_color,108.765540000,clipLimit=2.000000000 tile=8
+wiener_est_per_channel,40.282986667,wiener_color_mean/3 (serial BGR)
+wiener_color,120.848960000,full BGR motion blur then wiener
+nfr_extract_plus_clahe_both,330.026730000,CLAHE(marked)+CLAHE(cover)+extract
+nfr_extract_plus_wiener_both,508.219370000,wiener(blurred)+wiener(cover)+extract

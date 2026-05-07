@@ -5,6 +5,77 @@
 
 ---
 
+## 2026-05-07（tests 结果 CSV 与 experiments 文档对齐）
+
+- **新增** `tests/test_output_csv.h`：统一在 `tests/output/` 下写 CSV（复用 `exp_common.h` 的目录创建等）。
+- **单元 / 集成 / 性能**：`tests/unit_test_watermark.cpp`、`tests/integration_test_watermark.cpp`、`tests/perf_test_benchmark.cpp` 运行后分别默认写入 `tests/output/unit_test_results.csv`、`integration_test_it_em01.csv`、`perf_test_results.csv`（路径可由命令行参数覆盖，见 `tests/README.md`）。
+- **`tests/output/.gitkeep`**：保留空输出目录。
+- **更新** `experiments/README.md`：移除已迁走的 `ch6_perf_benchmark` 表述；§6.3.4 指向 `tests/perf_test_benchmark.cpp` 与 `tests/README.md`；VS 多入口说明含 `tests\*.cpp`。
+
+---
+
+## 2026-05-07（§1.3 研究内容与创新点修订稿）
+
+- **新增** `docs/ch1_section_1_3_revised.md`：与 **`WatermarkCodec::extract`** 一致的 **三通道融合表述**；预处理目标与消融结论的 **谨慎措辞**；**域对齐** 保留；创新点与「非理想增益」讨论对齐当前 CSV。
+
+---
+
+## 2026-05-07（§2.2.2～2.2.4 与图 2-4）
+
+- **新增** `docs/diagrams/fig2_4_watermark_embed_flow.drawio`、`fig2_4_watermark_embed_flow.mmd`：DWT-DCT-SVD 嵌入流程（双极性、仅改 σ₁、三通道循环）。
+- **新增** `docs/ch2_section_2_2_2_to_2_2_4_alignment.md`：与 `WatermarkCodec` 一致的 **公式 2-5～2-7** 写法、2.2.2 DCT 表述补句、提取步骤 (3) 与 **(σ′−σ)/α** 括号说明。
+
+---
+
+## 2026-05-07（§6.3.4 性能测试程序）
+
+> **后续**：性能基准已迁至 **`tests/perf_test_benchmark.cpp`**，CSV 默认 **`tests/output/perf_test_results.csv`**（见同日「tests 结果 CSV」条及 `tests/README.md`）。下列为当时记录，仓库中 **`experiments/ch6_perf_benchmark.cpp` 已移除**。
+
+- **曾新增** `experiments/ch6_perf_benchmark.cpp`：对 `ch6_images.csv` 逐图测量 **imread、embed、extract、CLAHE、维纳彩色、维纳/3、NFR 组合耗时**，均值写入 `experiments/output/ch6_perf_table6_14.csv`；`ColorWatermark.vcxproj` 加入该项并默认 **ExcludedFromBuild**，**恢复 `src\main.cpp` 为默认入口**；`ch6_exp6_motion_length_sweep.cpp` 改回排除以免误作唯一入口。
+- **更新** `experiments/README.md`：性能测试用法与表 6-14 字段说明。
+
+---
+
+## 2026-05-07（八组消融论文叙述稿）
+
+- **新增** `docs/ch6_ablation_results_text.md`：与重跑后 **`experiments/output/*.csv`** 逐项对齐的「八组消融」中文段落，可直接粘贴进论文；含实验五、六 **双侧维纳** 后的新 MEAN 与讨论要点。
+
+---
+
+## 2026-05-07（消融实验 CSV 与实验五/六代码）
+
+### 现象（仓库内 `experiments/output/*.csv`）
+
+- **实验二（CLAHE）**：域对齐下 MEAN **accuracy_no_preprocess≈79.57%**，**accuracy_clahe≈79.35%**，**delta≈−0.22 pp**；多幅图两列完全相同，`mean_abs_clahe_minus_low` 仍显著大于 0（CLAHE 改变了像素但多数比特判决未变）。
+- **实验五、六（旧版）**：维纳列大幅低于无预处理（约 **−21～−31 pp**），因代码采用 **`extract(wiener(I′), I_orig)`（仅复原待检图）**，与 **`WatermarkSystem`** 中 **`extract(wiener(I′), wiener(I_orig))`** 不一致，差分统计量在两侧变换域不对齐，结论不能支撑「系统默认提取管线」。
+- **实验七**：已为双侧维纳；CSV 仍显示无预处理 **>** 维纳（约 83% vs 70%），属算法层现象（见下）。
+- **论文中「60%→91%、63%→88%」等**：与**当前仓库 CSV 数值不一致**，若曾出自早期脚本或不同 β/噪声，需在文中注明数据来源或按现行脚本重跑更新。
+
+### 代码修正
+
+- **`ch6_exp5_motion_wiener.cpp`、`ch6_exp6_motion_length_sweep.cpp`**：维纳分支改为对 **cover** 同步 **`Preprocessor::wiener`**，与 **`WatermarkSystem`** 域对齐；需重新编译并**重跑**以刷新 `ch6_exp5_motion_wiener.csv`、`ch6_exp6_motion_lengths.csv`。
+
+---
+
+## 2026-05-07（§4.3 嵌入/提取流程与图 4-5、4-6）
+
+- **新增** `docs/ch4_section_4_3_corrected.md`：**§4.3 全文修订稿**（算法 4-1/4-2、公式 4-1/4-2、图 4-5/4-6 说明），与代码一致，可整体替换 Word 中原 §4.3。
+
+### 正文需更正的逻辑错误（相对当前仓库）
+
+1. **算法 4-1 标题为「嵌入」，所列伪代码实为「提取」**（CLAHE 双侧、`W_bit=(Σ'−Σ)/α` 等）。应按 **`WatermarkCodec::embed`** 重写为：输入载体 **I**、水印 **W**、α；输出 **Iw**；步骤为展平水印映射为 **双极性 {−1,+1}**、`σ' = σ + α·w`、逆变换合并。（公式 4-1 若写作 Σ′=Σ+α·W_bit，须注明实现中 **W_bit 为 ±1**，或与二值 0/1 的换算关系。）
+2. **算法 4-2 预处理**：`WatermarkSystem::extract` 在 **clahe / wiener** 时对 **待检测图与原始载体两侧同时**做相同预处理；伪代码若只处理 **I'** 与正文「域对齐」不一致，应改为双侧。（none 时两者均不处理。）
+3. **公式 4-2**：应写作 **`W_bit = (Σ' − Σ) / α`**（须括号）；Σ、Σ′ 在代码中为 **每块 DCT 系数矩阵的最大奇异值（标量 σ）**，不是整条对角矩阵。
+4. **投票与阈值**：`extract` 中为 **三通道估计值相加后除以 3（算术平均）**，再对每位 **`estimate ≥ 0` 判为 255，否则 0**（双极性解码）。正文「多数投票」「>0.5」与实现不完全一致，建议改为与代码一致的表述或注明伪代码抽象层级。
+5. **嵌入规则**：`embedWatermarkToSigma` 为 **`sigma += alpha * w`，w ∈ {−1,+1}**，不是 `{0,1}` 直接乘 α。
+
+### 新增图表
+
+- `docs/diagrams/fig4_5_watermark_embed_flow.drawio`：嵌入主线（双极性比特、三通道重复、σ′=σ+α·w）。
+- `docs/diagrams/fig4_6_watermark_extract_flow.drawio`：预处理双侧 → σ 差分 / α → 平均 → 零阈值 → reshape。
+
+---
+
 ## 2026-04-30（§2.2.1 / 图 2-3 三层 DWT 结构）
 
 - **新增** `docs/diagrams/fig2_3_dwt3level_structure.drawio`、`fig2_3_dwt3level_structure.mmd`：Mallat 塔式三层分解（每层 2×2 子带，仅 **LL** 继续下一层）；图注说明 **WatermarkCodec 仅一层 DWT**、Haar **[0.5,±0.5] 与实现 1/√2** 关系、正交与 **idwt2/dwt2** 可逆。

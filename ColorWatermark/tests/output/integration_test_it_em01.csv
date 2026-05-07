@@ -1,0 +1,12 @@
+image_name,accuracy_percent,passed,note
+Lena,100.000000000,1,IT-EM-01 embed-extract
+Baboon,100.000000000,1,IT-EM-01 embed-extract
+Peppers,100.000000000,1,IT-EM-01 embed-extract
+Sailboat,100.000000000,1,IT-EM-01 embed-extract
+House,100.000000000,1,IT-EM-01 embed-extract
+Airplane,100.000000000,1,IT-EM-01 embed-extract
+Beans,100.000000000,1,IT-EM-01 embed-extract
+Woodland,100.000000000,1,IT-EM-01 embed-extract
+Oakland,100.000000000,1,IT-EM-01 embed-extract
+Splash,100.000000000,1,IT-EM-01 embed-extract
+MEAN,100.000000000,1,over 10 images

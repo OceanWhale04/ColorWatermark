@@ -138,6 +138,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="experiments\ch6_exp6_motion_length_sweep.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="experiments\ch6_exp8_extreme_degradation.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
@@ -147,6 +150,15 @@
     <ClCompile Include="src\Utils.cpp" />
     <ClCompile Include="src\WatermarkCodec.cpp" />
     <ClCompile Include="src\WatermarkSystem.cpp" />
+    <ClCompile Include="tests\perf_test_benchmark.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="tests\unit_test_watermark.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="tests\integration_test_watermark.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="experiments\ch6_dataset.h" />

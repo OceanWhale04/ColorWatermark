@@ -32,8 +32,8 @@
 | `ch6_exp1_baseline.cpp` | 实验一 | 逐图 PSNR、SSIM、准确率 + MEAN 行 |
 | `ch6_exp2_lowlight_clahe.cpp` | 实验二 | β=0.3，无预处理 vs CLAHE + MEAN |
 | `ch6_exp3_lowlight_beta_sweep.cpp` | 实验三 | β∈{0.3,0.2,0.1} 的 10 幅均值 |
-| `ch6_exp5_motion_wiener.cpp` | 实验四 | L=15，无预处理 vs 维纳 + MEAN |
-| `ch6_exp6_motion_length_sweep.cpp` | 实验五 | L∈{10,15,20} 的 10 幅均值 |
+| `ch6_exp5_motion_wiener.cpp` | 实验五 | L=15，无预处理 vs 维纳 + MEAN |
+| `ch6_exp6_motion_length_sweep.cpp` | 实验六 | L∈{10,15,20} 的 10 幅均值 |
 
 ### 第六章（`works.md` 表 6-6～6-13 对应）
 
@@ -45,23 +45,25 @@
 
 一键合并 CSV：工程目录下运行 `python run_all_experiments.py`（见脚本内说明）。
 
+**§6.3.4 性能测试**已移至 **`tests/perf_test_benchmark.cpp`**，结果 CSV 默认 **`tests/output/perf_test_results.csv`**，见 **`tests/README.md`**。
+
 ### Visual Studio：多入口程序
 
-`.vcxproj` 已将 `ch6_exp*.cpp`、`tests\*.cpp` 及 `fig2_5/fig2_6` demo 设为 **ExcludedFromBuild**。跑某一实验时：
+`.vcxproj` 已将各 `ch6_exp*.cpp`、`tests\*.cpp` 及 `fig2_5/fig2_6` demo 设为 **ExcludedFromBuild**。跑某一实验或测试时：
 
-1. 将该 `.cpp` 的 **ExcludedFromBuild** 改为 `false`；
+1. 将目标 `.cpp` 的 **ExcludedFromBuild** 改为 `false`；
 2. 将 `src\main.cpp` 设为 **ExcludedFromBuild** `true`；
 3. 重新生成，得到单一 `ColorWatermark.exe` 即当前入口。
 
 默认配置为 **`src\main.cpp` 参与生成**、其余实验/测试排除。
 
-默认命令行：
+实验程序默认命令行：
 
 ```text
 程序.exe [ch6_images.csv] [watermark.bmp] [输出.csv]
 ```
 
-工作目录设为 **`ColorWatermark` 工程目录**（与 `test_images/` 相对路径一致）。VS 中每次只编译**一个**含 `main` 的 `ch6_exp*.cpp`。
+工作目录设为 **`ColorWatermark` 工程目录**（与 `test_images/` 相对路径一致）。VS 中每次只编译**一个**含 `main` 的 `ch6_exp*.cpp` 或 `tests\*.cpp`。
 
 ## 与 Word 中数值的差异说明
 

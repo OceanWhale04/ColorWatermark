@@ -1,0 +1,6 @@
+test_id,metric,value,passed,note
+UT-DWT-01,psnr_db,145.130516,1,Haar round-trip
+UT-SVD-01,max_abs_error,0.000000,1,8x8 reconstruction
+UT-CLAHE-01,pixel_min,0.000000,1,
+UT-CLAHE-01,pixel_max,68.000000,1,output range
+UT-PSF-01,sum_psf,1.000000,1,normalized PSF
