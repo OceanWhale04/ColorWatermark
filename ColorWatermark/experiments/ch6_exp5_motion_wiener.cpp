@@ -1,4 +1,5 @@
-// 实验五：运动模糊 L=15、30°，无预处理 vs 维纳（K=0.01，仅复原待检测图；载体为原始图）
+// 实验五：运动模糊 L=15、30°，无预处理 vs 维纳（K=0.01）
+// 与 WatermarkSystem::extract(preprocess=wiener) 一致：待检测图与原始载体均做维纳（域对齐）。
 // PSF 与 Utils::simulateMotionBlur 一致：长度 L → 核尺寸 2L+1
 
 #include "ch6_dataset.h"
@@ -52,7 +53,8 @@ int main(int argc, char* argv[]) {
 
         Mat ext0 = WatermarkCodec::extract(blurred, cover, kAlpha);
         Mat restored = Preprocessor::wiener(blurred, psf, kWienerK);
-        Mat ext1 = WatermarkCodec::extract(restored, cover, kAlpha);
+        Mat cref = Preprocessor::wiener(cover, psf, kWienerK);
+        Mat ext1 = WatermarkCodec::extract(restored, cref, kAlpha);
 
         double a0 = computeAccuracy(ext0, wm);
         double a1 = computeAccuracy(ext1, wm);

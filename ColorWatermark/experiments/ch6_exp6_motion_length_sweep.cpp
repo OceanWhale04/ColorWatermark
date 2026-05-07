@@ -51,7 +51,8 @@ int main(int argc, char* argv[]) {
             Mat blurred = simulateMotionBlur(marked, kAngle, L, kMotNoise);
             Mat ext0 = WatermarkCodec::extract(blurred, cover, kAlpha);
             Mat restored = Preprocessor::wiener(blurred, psf, kWienerK);
-            Mat ext1 = WatermarkCodec::extract(restored, cover, kAlpha);
+            Mat cref = Preprocessor::wiener(cover, psf, kWienerK);
+            Mat ext1 = WatermarkCodec::extract(restored, cref, kAlpha);
             sum0 += computeAccuracy(ext0, wm);
             sum1 += computeAccuracy(ext1, wm);
             n++;
