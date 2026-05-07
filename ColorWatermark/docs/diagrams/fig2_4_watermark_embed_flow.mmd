@@ -1,0 +1,12 @@
+%% 图2-4 水印嵌入（Mermaid）
+flowchart TB
+    I[彩色载体 I + 水印 W + α]
+    B[展平水印 → 双极性 b∈-1,+1]
+    C[RGB 分离]
+    L[每通道: DWT→LL]
+    D[8×8 分块 DCT]
+    S[每块 SVD: A=UΣVᵀ]
+    M[改最大奇异值 σ₁′=σ₁+α·b]
+    R[逆SVD / 逆DCT / 逆DWT]
+    O[merge → Iw]
+    I --> B --> C --> L --> D --> S --> M --> R --> O

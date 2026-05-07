@@ -5,9 +5,33 @@
 
 ---
 
+## 2026-05-07（tests 结果 CSV 与 experiments 文档对齐）
+
+- **新增** `tests/test_output_csv.h`：统一在 `tests/output/` 下写 CSV（复用 `exp_common.h` 的目录创建等）。
+- **单元 / 集成 / 性能**：`tests/unit_test_watermark.cpp`、`tests/integration_test_watermark.cpp`、`tests/perf_test_benchmark.cpp` 运行后分别默认写入 `tests/output/unit_test_results.csv`、`integration_test_it_em01.csv`、`perf_test_results.csv`（路径可由命令行参数覆盖，见 `tests/README.md`）。
+- **`tests/output/.gitkeep`**：保留空输出目录。
+- **更新** `experiments/README.md`：移除已迁走的 `ch6_perf_benchmark` 表述；§6.3.4 指向 `tests/perf_test_benchmark.cpp` 与 `tests/README.md`；VS 多入口说明含 `tests\*.cpp`。
+
+---
+
+## 2026-05-07（§1.3 研究内容与创新点修订稿）
+
+- **新增** `docs/ch1_section_1_3_revised.md`：与 **`WatermarkCodec::extract`** 一致的 **三通道融合表述**；预处理目标与消融结论的 **谨慎措辞**；**域对齐** 保留；创新点与「非理想增益」讨论对齐当前 CSV。
+
+---
+
+## 2026-05-07（§2.2.2～2.2.4 与图 2-4）
+
+- **新增** `docs/diagrams/fig2_4_watermark_embed_flow.drawio`、`fig2_4_watermark_embed_flow.mmd`：DWT-DCT-SVD 嵌入流程（双极性、仅改 σ₁、三通道循环）。
+- **新增** `docs/ch2_section_2_2_2_to_2_2_4_alignment.md`：与 `WatermarkCodec` 一致的 **公式 2-5～2-7** 写法、2.2.2 DCT 表述补句、提取步骤 (3) 与 **(σ′−σ)/α** 括号说明。
+
+---
+
 ## 2026-05-07（§6.3.4 性能测试程序）
 
-- **新增** `experiments/ch6_perf_benchmark.cpp`：对 `ch6_images.csv` 逐图测量 **imread、embed、extract、CLAHE、维纳彩色、维纳/3、NFR 组合耗时**，均值写入 `experiments/output/ch6_perf_table6_14.csv`；`ColorWatermark.vcxproj` 加入该项并默认 **ExcludedFromBuild**，**恢复 `src\main.cpp` 为默认入口**；`ch6_exp6_motion_length_sweep.cpp` 改回排除以免误作唯一入口。
+> **后续**：性能基准已迁至 **`tests/perf_test_benchmark.cpp`**，CSV 默认 **`tests/output/perf_test_results.csv`**（见同日「tests 结果 CSV」条及 `tests/README.md`）。下列为当时记录，仓库中 **`experiments/ch6_perf_benchmark.cpp` 已移除**。
+
+- **曾新增** `experiments/ch6_perf_benchmark.cpp`：对 `ch6_images.csv` 逐图测量 **imread、embed、extract、CLAHE、维纳彩色、维纳/3、NFR 组合耗时**，均值写入 `experiments/output/ch6_perf_table6_14.csv`；`ColorWatermark.vcxproj` 加入该项并默认 **ExcludedFromBuild**，**恢复 `src\main.cpp` 为默认入口**；`ch6_exp6_motion_length_sweep.cpp` 改回排除以免误作唯一入口。
 - **更新** `experiments/README.md`：性能测试用法与表 6-14 字段说明。
 
 ---

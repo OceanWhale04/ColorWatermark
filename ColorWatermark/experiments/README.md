@@ -45,26 +45,25 @@
 
 一键合并 CSV：工程目录下运行 `python run_all_experiments.py`（见脚本内说明）。
 
+**§6.3.4 性能测试**已移至 **`tests/perf_test_benchmark.cpp`**，结果 CSV 默认 **`tests/output/perf_test_results.csv`**，见 **`tests/README.md`**。
 
 ### Visual Studio：多入口程序
 
-`.vcxproj` 中 `ch6_perf_benchmark.cpp` 默认 **ExcludedFromBuild=true**。跑性能测试时：将 **`ch6_perf_benchmark.cpp`** 取消排除、将 **`src\main.cpp`** 设为排除，重新生成后在工作目录为工程根（含 `test_images/`）下运行生成的 `ColorWatermark.exe`（无子命令行参数时默认路径同上）。
+`.vcxproj` 已将各 `ch6_exp*.cpp`、`tests\*.cpp` 及 `fig2_5/fig2_6` demo 设为 **ExcludedFromBuild**。跑某一实验或测试时：
 
-`.vcxproj` 已将其他 `ch6_exp*.cpp`、`tests\*.cpp` 及 `fig2_5/fig2_6` demo 设为 **ExcludedFromBuild**。跑某一实验时：
-
-1. 将该 `.cpp` 的 **ExcludedFromBuild** 改为 `false`；
+1. 将目标 `.cpp` 的 **ExcludedFromBuild** 改为 `false`；
 2. 将 `src\main.cpp` 设为 **ExcludedFromBuild** `true`；
 3. 重新生成，得到单一 `ColorWatermark.exe` 即当前入口。
 
 默认配置为 **`src\main.cpp` 参与生成**、其余实验/测试排除。
 
-默认命令行：
+实验程序默认命令行：
 
 ```text
 程序.exe [ch6_images.csv] [watermark.bmp] [输出.csv]
 ```
 
-工作目录设为 **`ColorWatermark` 工程目录**（与 `test_images/` 相对路径一致）。VS 中每次只编译**一个**含 `main` 的 `ch6_exp*.cpp`。
+工作目录设为 **`ColorWatermark` 工程目录**（与 `test_images/` 相对路径一致）。VS 中每次只编译**一个**含 `main` 的 `ch6_exp*.cpp` 或 `tests\*.cpp`。
 
 ## 与 Word 中数值的差异说明
 

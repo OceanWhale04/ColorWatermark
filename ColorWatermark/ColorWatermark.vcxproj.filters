@@ -8,6 +8,11 @@
     <ClCompile Include="src\WatermarkSystem.cpp" />
     <ClCompile Include="src\CLI.cpp" />
     <ClCompile Include="src\Utils.cpp" />
+    <ClCompile Include="experiments\ch6_exp8_extreme_degradation.cpp" />
+    <ClCompile Include="experiments\ch6_exp6_motion_length_sweep.cpp" />
+    <ClCompile Include="tests\unit_test_watermark.cpp" />
+    <ClCompile Include="tests\integration_test_watermark.cpp" />
+    <ClCompile Include="tests\perf_test_benchmark.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\DWT_utils.h" />
@@ -16,9 +21,10 @@
     <ClInclude Include="include\CLI.h" />
     <ClInclude Include="include\WatermarkSystem.h" />
     <ClInclude Include="include\Utils.h" />
-    <ClInclude Include="experiments\ch5_dataset.h" />
     <ClInclude Include="experiments\exp_common.h" />
-    <ClInclude Include="experiments\ch5_run_helpers.h" />
+    <ClInclude Include="experiments\ch6_dataset.h" />
+    <ClInclude Include="experiments\ch6_run_helpers.h" />
+    <ClInclude Include="tests\test_output_csv.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="test_images\color\1024\2.2.05.tiff" />
@@ -47,6 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="opencv_debug.props" />
-    <None Include="experiments\ch5_images.csv" />
+    <None Include="experiments\ch6_images.csv" />
   </ItemGroup>
 </Project>
