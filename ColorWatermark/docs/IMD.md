@@ -5,6 +5,19 @@
 
 ---
 
+## 2026-05-07（§6.3.4 性能测试程序）
+
+- **新增** `experiments/ch6_perf_benchmark.cpp`：对 `ch6_images.csv` 逐图测量 **imread、embed、extract、CLAHE、维纳彩色、维纳/3、NFR 组合耗时**，均值写入 `experiments/output/ch6_perf_table6_14.csv`；`ColorWatermark.vcxproj` 加入该项并默认 **ExcludedFromBuild**，**恢复 `src\main.cpp` 为默认入口**；`ch6_exp6_motion_length_sweep.cpp` 改回排除以免误作唯一入口。
+- **更新** `experiments/README.md`：性能测试用法与表 6-14 字段说明。
+
+---
+
+## 2026-05-07（八组消融论文叙述稿）
+
+- **新增** `docs/ch6_ablation_results_text.md`：与重跑后 **`experiments/output/*.csv`** 逐项对齐的「八组消融」中文段落，可直接粘贴进论文；含实验五、六 **双侧维纳** 后的新 MEAN 与讨论要点。
+
+---
+
 ## 2026-05-07（消融实验 CSV 与实验五/六代码）
 
 ### 现象（仓库内 `experiments/output/*.csv`）

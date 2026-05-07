@@ -1,0 +1,107 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2">
+  <diagram id="fig4-6" name="图4-6 水印提取与预处理">
+    <mxGraphModel dx="1207" dy="880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="T0" value="图4-6 水印提取与预处理融合（WatermarkSystem + WatermarkCodec::extract）" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=13;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="80" y="15" width="600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PH" value="阶段一：预处理融合（域对齐）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="80" y="55" width="640" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="IN" value="输入：待检测 I&#39;、原始载体 I_orig、α、type（none / clahe / wiener）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="200" y="95" width="400" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="D1" value="type == clahe ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="320" y="155" width="160" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="CLA" value="对 I&#39; 与 I_orig 两侧同参 CLAHE（LAB 亮度通道）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="520" y="160" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="D2" value="type == wiener ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="320" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="WN" value="对 I&#39; 与 I_orig 两侧同 PSF、同 K 维纳复原" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="520" y="240" width="230" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="NOP" value="不预处理：I&#39;_proc = I&#39;，I_orig_proc = I_orig" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="515" y="310" width="240" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="JOIN" value="得到域对齐后的 I&#39;_proc、I_orig_proc" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="270" y="380" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PH2" value="阶段二：频域奇异值差分（extract 内核）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="80" y="440" width="640" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="SP" value="split → R,G,B；各通道 [0,1] float" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="290" y="485" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="CH" value="每通道：DWT→LL → 8×8 DCT-SVD → 每块最大奇异值矩阵&lt;br&gt;σ_det（来自 I&#39;_proc）、σ_orig（来自 I_orig_proc）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=center;spacingLeft=8;" parent="1" vertex="1">
+          <mxGeometry x="215" y="540" width="370" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="EST" value="每块：estimate = (σ_det − σ_orig) / α（公式4-2，标量最大奇异值）&lt;br&gt;三通道累加到 voteAccum[idx]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;align=center;spacingLeft=8;" parent="1" vertex="1">
+          <mxGeometry x="140" y="605" width="520" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="PH3" value="阶段三：投票重构" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontStyle=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="80" y="670" width="640" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="VOT" value="voteAccum /= 3（三通道算术平均，非多数投票）&lt;br&gt;零阈值：estimate_avg ≥ 0 → 二值 255，否则 0&lt;br&gt;（双极性解码；与「&amp;gt;0.5」不同）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;spacingLeft=8;" parent="1" vertex="1">
+          <mxGeometry x="245" y="720" width="310" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="RS" value="reshape → 32×32 二值图 W_ext" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" parent="1" vertex="1">
+          <mxGeometry x="280" y="795" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" style="endArrow=block;html=1;rounded=0;" parent="1" source="IN" target="D1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="是" style="endArrow=block;html=1;rounded=0;fontSize=10;" parent="1" source="D1" target="CLA" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="否" style="endArrow=block;html=1;rounded=0;fontSize=10;" parent="1" source="D1" target="D2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="是" style="endArrow=block;html=1;rounded=0;fontSize=10;" parent="1" source="D2" target="WN" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="否" style="endArrow=block;html=1;rounded=0;fontSize=10;" parent="1" source="D2" target="NOP" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="endArrow=block;html=1;rounded=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="CLA" target="JOIN" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="185" />
+              <mxPoint x="780" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" style="endArrow=block;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="WN" target="JOIN" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="263" />
+              <mxPoint x="770" y="390" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" style="endArrow=block;html=1;rounded=0;" parent="1" source="NOP" target="JOIN" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" style="endArrow=block;html=1;rounded=0;" parent="1" source="JOIN" target="SP" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" style="endArrow=block;html=1;rounded=0;" parent="1" source="SP" target="CH" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" style="endArrow=block;html=1;rounded=0;" parent="1" source="CH" target="EST" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" style="endArrow=block;html=1;rounded=0;" parent="1" source="EST" target="VOT" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" style="endArrow=block;html=1;rounded=0;" parent="1" source="VOT" target="RS" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
