@@ -137,13 +137,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="experiments\ch6_exp6_motion_length_sweep.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="experiments\ch6_exp8_extreme_degradation.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="experiments\ch6_fig68_ll_dct_spectrum.cpp" />
     <ClCompile Include="src\CLI.cpp" />
     <ClCompile Include="src\DWT_utils.cpp" />
     <ClCompile Include="src\Preprocessor.cpp" />

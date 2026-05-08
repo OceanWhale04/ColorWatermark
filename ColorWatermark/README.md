@@ -1,5 +1,7 @@
 # 命令行与测试运行说明
 
+更完整的**项目结构、输出路径与编译说明**见仓库根目录 **`README.md`**（`ColorWatermark/README.md` 上一级）。
+
 ## 可执行文件位置
 
 从解决方案根目录 `ColorWatermark.sln` 所在文件夹编译 **x64 | Debug** 后，主程序为：
